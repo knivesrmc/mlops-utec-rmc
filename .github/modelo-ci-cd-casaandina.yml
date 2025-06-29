@@ -1,0 +1,47 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - 'master' 
+
+env:
+  VENV_DIR: venv
+  GCP_PROJECT: mlops-utec-22062025
+  IMAGE_NAME: gcr.io/${{ env.GCP_PROJECT }}/ml-project
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'  # Especifica tu versión exacta
+
+    - name: Set up virtual environment
+      run: |
+        python -m venv $VENV_DIR
+        source $VENV_DIR/bin/activate
+        echo "VIRTUAL_ENV=$VENV_DIR" >> $GITHUB_ENV
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip setuptools wheel
+        pip install -e .[dev]  # Si tienes extras como dev, test, etc.
+
+    - name: Set up gcloud CLI
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ env.GCP_PROJECT }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true

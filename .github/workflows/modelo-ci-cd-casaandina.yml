@@ -8,7 +8,7 @@ on:
 env:
   VENV_DIR: venv
   GCP_PROJECT: mlops-utec-22062025
-  IMAGE_NAME: gcr.io/${{ env.GCP_PROJECT }}/ml-project
+  IMAGE_NAME: gcr.io/$GCP_PROJECT/ml-project
 
 permissions:
   contents: read

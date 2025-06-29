@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
 with open("requirements.txt") as f:
-    requeriments= f.read().splitlines()
+    requirements= f.read().splitlines()
 setup(
-    name="MLOPS-PROJECT-1",
-    version="0.1",
+    name="MLOPS-UTEC-GIT-2025",
+    version="1.0",
     author="Raul Martinez",
     packages=find_packages(),
-    install_requires=requeriments
+    install_requires=requirements
 
 
 )

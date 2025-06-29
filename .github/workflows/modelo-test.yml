@@ -1,7 +1,9 @@
 name: Test GCP Credentials
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'master' 
 
 jobs:
   test-auth:

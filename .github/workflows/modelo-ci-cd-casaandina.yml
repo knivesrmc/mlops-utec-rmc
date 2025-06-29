@@ -28,20 +28,47 @@ jobs:
       with:
         python-version: '3.10'  # Especifica tu versión exacta
 
-    - name: Set up virtual environment
+    - name: Configuracion de Venv
       run: |
         python -m venv $VENV_DIR
         source $VENV_DIR/bin/activate
         echo "VIRTUAL_ENV=$VENV_DIR" >> $GITHUB_ENV
 
-    - name: Install dependencies
+    - name: Instalacion de dependencias
       run: |
         pip install --upgrade pip setuptools wheel
         pip install -e .[dev]  # Si tienes extras como dev, test, etc.
 
-    - name: Set up gcloud CLI
+    - name: Configuracion de GCLOUD CLI
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: ${{ env.GCP_PROJECT }}
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
+
+    - name: Docker
+      id: docker
+      run: |
+        # Add gcloud to PATH
+        echo "$PATH"
+        which gcloud
+        gcloud --version
+        
+        # Docker auth
+        gcloud auth configure-docker --quiet
+        
+        # Get SHA for tag
+        echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "tag=latest" >> $GITHUB_OUTPUT
+
+    - name: Build Docker image
+      run: |
+        docker build \
+          --tag $IMAGE_NAME:${{ steps.docker.outputs.tag }} \
+          --tag $IMAGE_NAME:${{ steps.docker.outputs.sha }} \
+          .
+
+    - name: Push to GCR
+      run: |
+        docker push $IMAGE_NAME:${{ steps.docker.outputs.tag }}
+        docker push $IMAGE_NAME:${{ steps.docker.outputs.sha }}

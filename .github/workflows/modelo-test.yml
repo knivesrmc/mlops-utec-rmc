@@ -1,0 +1,25 @@
+name: Test GCP Credentials
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-auth:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: mlops-utec-22062025
+          service_account_key: ${{ secrets.GCP_SA_KEY  }}
+          export_default_credentials: true
+
+      - name: Test authentication
+        run: |
+          gcloud auth list
+          gcloud config list
+          gcloud projects describe mlops-utec-22062025

@@ -1,4 +1,4 @@
-name: Test GCP Credentials
+name: Probar GCP Credentials
 
 on:
   push:
@@ -6,21 +6,21 @@ on:
       - 'master' 
 
 jobs:
-  test-auth:
+  gcp-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Google Cloud SDK
+      - name: Autenticarse en GCP
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: mlops-utec-22062025
-          service_account_key: ${{ secrets.GCP_SA_KEY  }}
+          service_account_key: ${{ secrets.GCP_SA_KEY   }}
           export_default_credentials: true
 
-      - name: Test authentication
+      - name: Verificar autenticación
         run: |
           gcloud auth list
           gcloud config list

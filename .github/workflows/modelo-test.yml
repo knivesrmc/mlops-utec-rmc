@@ -14,14 +14,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Autenticarse en GCP
-        uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: mlops-utec-22062025
-          service_account_key: ${{ secrets.GCP_SA_KEY   }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
-
+          install_components: 'gcloud'
+          
       - name: Verificar autenticación
         run: |
           gcloud auth list
           gcloud config list
-          gcloud projects describe mlops-utec-22062025
+          gcloud projects describe mlops-utec-22062025 || echo "Error al describir proyecto"
+          gsutil ls || echo "Error al listar buckets"

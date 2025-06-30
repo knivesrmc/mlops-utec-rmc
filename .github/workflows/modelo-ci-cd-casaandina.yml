@@ -82,8 +82,5 @@ jobs:
           --allow-unauthenticated \
           --port=8080 \
           --timeout=300s \
-          --set-env-vars=PORT=8080 \
           --cpu=1 \
-          --memory=512Mi \
-          --min-instances=1 \
-          --max-instances=3
+          --memory=512Mi

@@ -8,6 +8,8 @@ env:
   VENV_DIR: venv
   GCP_PROJECT: mlops-utec-22062025
   IMAGE_NAME: gcr.io/mlops-utec-22062025/ml-project
+  SERVICE_NAME: ml-project
+  REGION: us-central1
 
 permissions:
   contents: read
@@ -70,3 +72,11 @@ jobs:
       run: |
         docker push $IMAGE_NAME:${{ steps.docker.outputs.tag }}
         docker push $IMAGE_NAME:${{ steps.docker.outputs.sha }}
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy $SERVICE_NAME \
+          --image=$IMAGE_NAME:${{ steps.docker.outputs.tag }} \
+          --platform=managed \
+          --region=$REGION \
+          --allow-unauthenticated

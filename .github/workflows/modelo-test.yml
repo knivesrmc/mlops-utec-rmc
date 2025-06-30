@@ -2,7 +2,7 @@ name: Probar GCP Credentials
 
 on:
   push:
-    branches: ['master']
+    branches: ['main']
 
 jobs:
   gcp-test:

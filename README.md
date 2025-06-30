@@ -8,41 +8,24 @@ Presentado el mes de Junio-Julio
 _Es necesario iniciar para la ejecucion respectiva, tener en cuenta los procesos de Github_
 
 ```
-
-```
-
-### Instalación 🔧
-
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
-
-```
-hasta finalizar
+git push origin master
 ```
 
 ## Despliegue 📦
 
-_Agrega notas adicionales sobre como hacer deploy_
+_Para desplegar, el archivo .github\workflows que se ejecutara al realizar git push origin master_
 
+```
+modelo-ci-cd-casaandina.yml
+```
 ## Construido con 🛠️
 
 _Menciona las herramientas que utilizaste para crear tu proyecto_
 
-* [Python](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [MFLOW](https://maven.apache.org/) - Manejador de dependencias
-* [GCP](https://rometools.github.io/rome/) - Usado para generar RSS
-
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
+* [Python](https://www.python.org/) - Lenguaje usado
+* [MFLOW](https://mlflow.org/) - Plataforma de flow
+* [GCP](https://console.cloud.google.com/) - Nube usada
 
 ## Autores ✒️
 
-* **Raul Martinez Cutipa** - [villanuevand](https://github.com/villanuevand)
+* **Raul Martinez Cutipa** - [knivesrmc](https://github.com/knivesrmc)

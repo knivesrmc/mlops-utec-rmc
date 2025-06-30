@@ -2,6 +2,7 @@ import joblib
 import numpy as np
 from config.paths_config import MODEL_OUTPUT_PATH
 from flask import Flask, render_template,request
+import os
 
 app = Flask(__name__)
 
@@ -34,4 +35,5 @@ def index():
     return render_template("index.html" , prediction=None)
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0' , port=5000)
+    port = int(os.environ.get("PORT", 8080))  # Usa 8080 para Cloud Run
+    app.run(host="0.0.0.0", port=port)  # Asegúrate de usar 0.0.0.0

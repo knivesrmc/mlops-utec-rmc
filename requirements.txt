@@ -1,4 +1,4 @@
-pandas
+pandas>=1.3.0
 numpy
 google-cloud-storage
 scikit-learn
@@ -6,4 +6,6 @@ pyyaml
 imbalanced-learn
 lightgbm
 mlflow
-flask
+flask>=2.0.0
+gunicorn>=20.0.0
+joblib>=1.0.0

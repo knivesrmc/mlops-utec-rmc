@@ -15,19 +15,13 @@ jobs:
       - name: Autenticar en GCP
         uses: google-github-actions/auth@v2
         with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}  # ¡Cambiado de service_account_key a credentials_json!
           project_id: mlops-utec-22062025
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          create_credentials_file: true
 
       - name: Configurar Google Cloud
         uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: mlops-utec-22062025
-          install_components: 'gcloud'
 
       - name: Verificar autenticación
         run: |
           gcloud auth list
-          gcloud config list
           gcloud projects describe mlops-utec-22062025
-          gcloud storage ls

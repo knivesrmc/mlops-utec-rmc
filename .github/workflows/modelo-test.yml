@@ -32,3 +32,4 @@ jobs:
           echo "\nProbando acceso a recursos:"
           gcloud projects describe mlops-utec-22062025 --format=json || echo "Error al describir proyecto"
           gcloud storage ls || echo "Error al listar buckets"
+          

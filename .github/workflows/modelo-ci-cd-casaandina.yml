@@ -80,7 +80,6 @@ jobs:
           --platform=managed \
           --region=$REGION \
           --allow-unauthenticated \
-          --port=8080 \
           --timeout=300s \
           --cpu=1 \
           --memory=512Mi

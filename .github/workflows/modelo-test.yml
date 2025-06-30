@@ -23,7 +23,12 @@ jobs:
           
       - name: Verificar autenticación
         run: |
+          echo "Cuentas autenticadas:"
           gcloud auth list
+          
+          echo "\nConfiguración activa:"
           gcloud config list
-          gcloud projects describe mlops-utec-22062025 || echo "Error al describir proyecto"
-          gsutil ls || echo "Error al listar buckets"
+          
+          echo "\nProbando acceso a recursos:"
+          gcloud projects describe mlops-utec-22062025 --format=json || echo "Error al describir proyecto"
+          gcloud storage ls || echo "Error al listar buckets"

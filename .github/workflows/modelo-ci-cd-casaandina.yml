@@ -4,6 +4,7 @@ on:
   push:
     branches: ['master']
 
+
 env:
   VENV_DIR: venv
   GCP_PROJECT: mlops-utec-22062025

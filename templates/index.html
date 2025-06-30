@@ -1,147 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width , initial=scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static' , filename='style.css') }}">
-    <title>HOTEL RESERVATION PREDICTION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Predicción de Reservas - Casa Andina</title>
+    <style>
+        :root {
+            --primary-color: #005f6a;
+            --secondary-color: #e3a71b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url('https://www.casa-andina.com/images/background-pattern.jpg');
+            background-attachment: fixed;
+        }
+        
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            max-height: 80px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,95,106,0.2);
+        }
+        
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            display: block;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #d19416;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        
+        .result p {
+            margin: 0;
+        }
+        
+        .hotel-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+        
+        .benefit-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .benefit-icon {
+            font-size: 24px;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 15px;
+            }
+            
+            .form-section {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 
-
 <body>
-<div class="container">
-    <h2>Hotel Reservation Prediction</h2>
+    <div class="header">
+        <img src="https://www.casa-andina.com/images/logo.png" alt="Casa Andina" class="logo">
+    </div>
 
-    <form method="POST">
-        <div class="form-group">
-            <label for="lead_time">Lead Time</label>
-            <input type="number" id="lead_time" name="lead_time" required>
+    <div class="container">
+        <h2>Predicción de Reservas</h2>
+        
+        <img src="https://www.casa-andina.com/images/hotel-exterior.jpg" alt="Casa Andina" class="hotel-image">
+        
+        <div class="benefits">
+            <div class="benefit-card">
+                <div class="benefit-icon">🏨</div>
+                <h3>Experiencia Única</h3>
+                <p>Hoteles con auténtico estilo peruano</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🍽️</div>
+                <h3>Gastronomía</h3>
+                <p>Sabores tradicionales del Perú</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📍</div>
+                <h3>Ubicaciones Privilegiadas</h3>
+                <p>En los mejores destinos del país</p>
+            </div>
         </div>
 
+        <form method="POST">
+            <div class="form-container">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="lead_time">Tiempo de Anticipación (días)</label>
+                        <input type="number" id="lead_time" name="lead_time" required>
+                    </div>
 
-        <div class="form-group">
-            <label for="no_of_special_request">No_of_special_request</label>
-            <input type="number" id="no_of_special_request" name="no_of_special_request" required>
+                    <div class="form-group">
+                        <label for="no_of_special_request">Solicitudes Especiales</label>
+                        <input type="number" id="no_of_special_request" name="no_of_special_request" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="avg_price_per_room">Precio Promedio por Habitación (USD)</label>
+                        <input type="number" id="avg_price_per_room" name="avg_price_per_room" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="arrival_month">Mes de Llegada</label>
+                        <select id="arrival_month" name="arrival_month" required>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="arrival_date">Día de Llegada</label>
+                        <select id="arrival_date" name="arrival_date" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="market_segment_type">Segmento de Mercado</label>
+                        <select id="market_segment_type" name="market_segment_type" required>
+                            <option value="0">Aviación</option>
+                            <option value="1">Cortesía</option>
+                            <option value="2">Corporativo</option>
+                            <option value="3">Offline</option>
+                            <option value="4">Online</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="no_of_week_nights">Noches entre semana</label>
+                        <input type="number" id="no_of_week_nights" name="no_of_week_nights" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="no_of_weekend_nights">Noches de fin de semana</label>
+                        <input type="number" id="no_of_weekend_nights" name="no_of_weekend_nights" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="type_of_meal_plan">Tipo de Plan de Comidas</label>
+                        <select id="type_of_meal_plan" name="type_of_meal_plan" required>
+                            <option value="0">Plan de Comidas 1</option>
+                            <option value="1">Plan de Comidas 2</option>
+                            <option value="2">Plan de Comidas 3</option>
+                            <option value="3">No seleccionado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_type_reserved">Tipo de Habitación</label>
+                        <select id="room_type_reserved" name="room_type_reserved" required>
+                            <option value="0">Habitación Sencilla</option>
+                            <option value="1">Habitación Doble</option>
+                            <option value="2">Suite</option>
+                            <option value="3">Suite Ejecutiva</option>
+                            <option value="4">Habitación Familiar</option>
+                            <option value="5">Bungalow</option>
+                            <option value="6">Suite Presidencial</option>
+                        </select>
+                    </div>
+                    
+                    <img src="https://www.casa-andina.com/images/hotel-room.jpg" alt="Habitación en Casa Andina" class="hotel-image">
+                </div>
+            </div>
+
+            <button type="submit">Predecir Comportamiento</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result" style="background-color: {% if prediction == 1 %}#e8f5e9{% else %}#ffebee{% endif %}; color: {% if prediction == 1 %}#2e7d32{% else %}#c62828{% endif %};">
+            {% if prediction == 0 %}
+            <p>El cliente probablemente cancelará su reserva</p>
+            {% elif prediction == 1 %}
+            <p>El cliente probablemente NO cancelará su reserva</p>
+            {% endif %}
         </div>
-
-        <div class="form-group">
-            <label for="avg_price_per_room">Avg_price_per_room</label>
-            <input type="number" id="avg_price_per_room" name="avg_price_per_room" required>
-        </div>
-
-        <div class="form-group">
-            <label for="arrival_month">Arrival Month</label>
-            <select id="arrival_month" name="arrival_month" required>
-                <option value="1">Januray</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-        </div>
-
-
-        <div class="form-group">
-            <label for="arrival_date">Arrival Date</label>
-            <select id="arrival_date" name="arrival_date" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="market_segment_type">Market_segment_type</label>
-            <select id="market_segment_type" name="market_segment_type" required>
-                <option value="0">Aviation</option>
-                <option value="1">Complimentary</option>
-                <option value="2">Corporate</option>
-                <option value="3">Offline</option>
-                <option value="4">Online</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="no_of_week_nights">No_of_week_nights</label>
-            <input type="number" id="no_of_week_nights" name="no_of_week_nights" required>
-        </div>
-
-        <div class="form-group">
-            <label for="no_of_weekend_nights">No_of_weekend_nights</label>
-            <input type="number" id="no_of_weekend_nights" name="no_of_weekend_nights" required>
-        </div>
-
-        <div class="form-group">
-            <label for="type_of_meal_plan">Type_of_meal_plan</label>
-            <select id="type_of_meal_plan" name="type_of_meal_plan" required>
-                <option value="0">Meal Plan 1</option>
-                <option value="1">Meal Plan 2</option>
-                <option value="2">Meal Plan 3</option>
-                <option value="3">Not Selected</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="room_type_reserved">Type_of_meal_plan</label>
-            <select id="room_type_reserved" name="room_type_reserved" required>
-                <option value="0">Room Type 1</option>
-                <option value="1">Room Type 2</option>
-                <option value="2">Room Type 3</option>
-                <option value="3">Room Type 4</option>
-                <option value="4">Room Type 5</option>
-                <option value="5">Room Type 6</option>
-                <option value="6">Room Type 7</option>
-            </select>
-        </div>
-
-        <button type="submit">Predict</button>
-    </form>
-
-    {% if prediction is not none %}
-    <div class="result">
-        {% if prediction == 0 %}
-        <p>The Customer is going to cancel his reservation</p>
-        {% elif prediction == 1 %}
-        <p>The Customer is not going to cancel his reservation</p>
         {% endif %}
     </div>
-    {% endif %}
-</div>
 
+    <div class="footer">
+        <p>© 2023 Casa Andina. Todos los derechos reservados.</p>
+    </div>
 </body>
 </html>

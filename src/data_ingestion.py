@@ -56,7 +56,7 @@ class DataIngestion:
         try:
             logger.info("Iniciando el proceso de ingesta de data")
             #Comentado--
-            self.descarga_csv_desde_gcp()
+            ##self.descarga_csv_desde_gcp()
             self.split_data()
             logger.info("Finalizacion de ingesta de data")
         except CustomException as ce:

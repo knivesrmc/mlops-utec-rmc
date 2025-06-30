@@ -3,19 +3,12 @@
 Este proyecto fue creado para curso de Machine Learning Operacions, realizado en la UTEC.
 Presentado el mes de Junio-Julio
 
-## Comenzando 🚀
-
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
-Mira **Deployment** para conocer como desplegar el proyecto.
-
-
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Es necesario iniciar para la ejecucion respectiva, tener en cuenta los procesos de Github_
 
 ```
-Da un ejemplo
+
 ```
 
 ### Instalación 🔧

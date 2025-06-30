@@ -25,6 +25,8 @@ COPY . .
 # Install the package (remove -e for production)
 RUN pip install --no-cache-dir .
 
+RUN python pipeline/training_pipeline.py
+
 # Expose the correct port for Cloud Run
 EXPOSE 8080
 

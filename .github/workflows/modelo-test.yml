@@ -21,6 +21,12 @@ jobs:
           export_default_credentials: true
           install_components: 'gcloud'
           
+      - name: Verificar formato secreto
+        run: |
+            echo "${{ secrets.GCP_SA_KEY }}" > temp_key.json
+            head -n 3 temp_key.json
+            rm temp_key.json
+          
       - name: Verificar autenticación
         run: |
           echo "Cuentas autenticadas:"
@@ -32,4 +38,3 @@ jobs:
           echo "\nProbando acceso a recursos:"
           gcloud projects describe mlops-utec-22062025 --format=json || echo "Error al describir proyecto"
           gcloud storage ls || echo "Error al listar buckets"
-          
